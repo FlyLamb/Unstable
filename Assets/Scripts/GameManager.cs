@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance;
     public CanvasGroup menu;
     public CanvasGroup fade;
+    public CanvasGroup helpers;
 
     public GameObject unicycle;
 
@@ -20,6 +21,10 @@ public class GameManager : MonoBehaviour {
     public TextMeshProUGUI scoreDisplay;
     public TextMeshProUGUI hscoreDisplay;
     public TextMeshProUGUI endScreen;
+
+    public GameObject menuCamera;
+
+    [Space] public string[] deathMsg;
 
     private void Awake() {
         instance = this;
@@ -50,8 +55,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private IEnumerator LoadGameE() {
-        FindObjectOfType<Unicycle>().tiltU += 15;
-        FindObjectOfType<Unicycle>().tiltV += Random.Range(-10f,10f);
+        
         var w = SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
         yield return null;
         while (w.progress < 0.8) {
@@ -60,17 +64,30 @@ public class GameManager : MonoBehaviour {
         w.allowSceneActivation = true;
         yield return null;
         
-        menu.TweenCanvasGroupAlpha(0, 0.5f).SetOnComplete(() => menu.gameObject.SetActive(false));
+        menu.TweenCanvasGroupAlpha(0, 0.5f).SetOnComplete(() => {
+            menu.gameObject.SetActive(false);
+            FindObjectOfType<Unicycle>().tiltU = 15;
+            FindObjectOfType<Unicycle>().tiltV = Random.Range(-10f,10f);
+            FindObjectOfType<Unicycle>().isDead = false;
+        });
+        helpers.TweenCanvasGroupAlpha(1, 0.5f);
         score = 0;
+        
+        menuCamera.SetActive(false);
     }
 
+    private string GetRandomDeathMessage() {
+        return "oof";
+    }
+    
     public void Die() {
         Destroy(GameObject.Find("Unicycle(Clone)"), .5f);
-        endScreen.text = $@"<size=42><b>oof</b></size>
+        endScreen.text = $@"<size=42><b>{GetRandomDeathMessage()}</b></size>
 
 Your score: {score}
 <size={(score>highscore?34:24)}>{(score>highscore?"New":"Your")} highscore: {(score>highscore?score:highscore)}</size>
 ";
+        helpers.TweenCanvasGroupAlpha(0, 0.1f);
         fade.TweenCanvasGroupAlpha(1, 0.5f).SetOnComplete(() => {
             menu.gameObject.SetActive(true);
             menu.alpha = 1;
@@ -78,7 +95,7 @@ Your score: {score}
 
             fade.TweenCanvasGroupAlpha(0, 0.5f).SetDelay(1);
             //destroy player
-            
+            menuCamera.SetActive(true);
             Instantiate(unicycle).SetActive(true);
         });
         if (score > highscore) {

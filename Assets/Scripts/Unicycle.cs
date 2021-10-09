@@ -5,19 +5,25 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 public class Unicycle : MonoBehaviour {
-    [SerializeField] private Transform visualV, visualU;
+    
+    [Header("Tilt")]
+    public float tiltingForce = 2;
+    public Transform visualV, visualU;
     public float tiltU;
     public float tiltV;
-    public float tiltEffect = 2;
+    public float gravityTiltEffect = 2;
     public float naturalGravity = 1;
-    public float forceMultiplier = 2;
-    public float maxFVelocity = 1;
-    public float tiltClamp = 0.04f;
+    public float maxTiltSpeed = 0.04f;
+    
+    [Header("Movement")]
+    public float movementForce = 1;
     public float maxSpeed = 5;
-
+    public Rigidbody rb;
+    
+    [Header("Other")]
     public bool isDead = true;
-
-    [SerializeField] private Rigidbody rb;
+    public Wheel wheel;
+    
 
     private void Update() {
         if(isDead) return;
@@ -27,13 +33,13 @@ public class Unicycle : MonoBehaviour {
 
         
         
-        float y = (Input.GetKeyDown(KeyCode.W) ? forceMultiplier : 0) -
-                  (Input.GetKeyDown(KeyCode.S) ? forceMultiplier : 0);
-        float x = (Input.GetKeyDown(KeyCode.D) ? forceMultiplier : 0) -
-                  (Input.GetKeyDown(KeyCode.A) ? forceMultiplier : 0);
+        float y = (Input.GetKeyDown(KeyCode.W) ? tiltingForce : 0) -
+                  (Input.GetKeyDown(KeyCode.S) ? tiltingForce : 0);
+        float x = (Input.GetKeyDown(KeyCode.D) ? tiltingForce : 0) -
+                  (Input.GetKeyDown(KeyCode.A) ? tiltingForce : 0);
         tiltU -= y;
         tiltV += x;
-        rb.AddForce(Vector3.forward * maxFVelocity * y, ForceMode.Acceleration);
+        rb.AddForce(Vector3.forward * movementForce * y, ForceMode.Acceleration);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
     }
 
@@ -47,7 +53,11 @@ public class Unicycle : MonoBehaviour {
         }
 
         
-        tiltU += tiltU * Mathf.Clamp(Mathf.Abs(tiltEffect / (900 * naturalGravity)), -tiltClamp * naturalGravity * 0.85f,tiltClamp * naturalGravity * 0.85f);
-        tiltV += tiltV * Mathf.Clamp(Mathf.Abs(tiltEffect / (900 * naturalGravity)), -tiltClamp * naturalGravity * 0.85f,tiltClamp * naturalGravity * 0.85f);
+        tiltU += tiltU * Mathf.Clamp(Mathf.Abs(gravityTiltEffect / (900 * naturalGravity)), -maxTiltSpeed * naturalGravity * 0.85f,maxTiltSpeed * naturalGravity * 0.85f);
+        tiltV += tiltV * Mathf.Clamp(Mathf.Abs(gravityTiltEffect / (900 * naturalGravity)), -maxTiltSpeed * naturalGravity * 0.85f,maxTiltSpeed * naturalGravity * 0.85f);
+    }
+
+    private void OnCollisionStay(Collision collisionInfo) {
+        wheel.velocity = collisionInfo.relativeVelocity;
     }
 }

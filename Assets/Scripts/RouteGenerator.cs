@@ -15,7 +15,6 @@ public class RouteGenerator : MonoBehaviour {
     private List<GameObject> instances;
     
     private void Start() {
-        FindObjectOfType<Unicycle>().isDead = false;
         instances = new ();
         for (int i = 0; i < genOnStart; i++) {
             Generate();
