@@ -143,6 +143,8 @@ MonoBehaviour:
   height: 9
   rooftopPresets:
   - {fileID: 8958145346726527682, guid: a6859ad0093feb5449ce6cb3593efed9, type: 3}
+  - {fileID: 4971439896382925673, guid: 17cad44648cf1944ba4412f429b6c316, type: 3}
+  - {fileID: 2066097533237337676, guid: c720153df4e1536429cb540687663bd6, type: 3}
 --- !u!65 &2242567902898377609
 BoxCollider:
   m_ObjectHideFlags: 0

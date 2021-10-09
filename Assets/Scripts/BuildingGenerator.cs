@@ -30,6 +30,9 @@ public class BuildingGenerator : MonoBehaviour {
     }
 
     public void GenerateRooftop() {
-        Instantiate(rooftopPresets[Random.Range(0, rooftopPresets.Length)], transform);
+        foreach (var s in slots) {
+            Instantiate(rooftopPresets[Random.Range(0, rooftopPresets.Length)], s.transform);
+        }
+        
     }
 }

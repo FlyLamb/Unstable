@@ -44,7 +44,7 @@ public class Unicycle : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if ((Mathf.Abs(tiltU) > 80 || Mathf.Abs(tiltV) > 80) && !isDead) {
+        if ((Mathf.Abs(tiltU) > 85 || Mathf.Abs(tiltV) > 85) && !isDead) {
             // lost
             rb.constraints = RigidbodyConstraints.None;
             isDead = true;

@@ -2,18 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Plank : MonoBehaviour {
 
     public float width, height;
 
-    private void Start() {
-        //Connect(Vector3.zero, Vector3.forward * 10 + Vector3.up * 4); 
-    }
+    public GameObject coin;
 
     public void Connect(Vector3 a, Vector3 b) {
         Mesh mesh = new Mesh();
-
+        GenerateCoins(Random.Range(-1,10), a,b);
         a = transform.InverseTransformPoint(a);
         b = transform.InverseTransformPoint(b);
         
@@ -52,5 +51,26 @@ public class Plank : MonoBehaviour {
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;
         
+        
+    }
+
+    public void GenerateCoins(int amount, Vector3 a, Vector3 b) {
+        if(amount <= 0) return;
+        for (int i = 0; i < amount; i++) {
+            var p = Vector3.Lerp(a, b, (float)i / amount);
+            Instantiate(coin,  p+ Vector3.up * 0.5f + Coinoise(p), Quaternion.identity, transform);
+        }
+    }
+
+    private Vector3 Coinoise(Vector3 b) {
+        var scale = 0.10214124f;
+        var magnitude = .3f;
+
+        float x = Mathf.PerlinNoise(b.z * scale, 0);
+        x -= 0.5f;
+        x *= 10;
+        x = Mathf.Clamp(x, -magnitude, magnitude);
+        
+        return new Vector3(x, 0, 0);
     }
 }

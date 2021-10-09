@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 0.2
   height: 0.05
+  coin: {fileID: 1539774490268797294, guid: ca2c66e89487143489dd92e5964384e9, type: 3}
 --- !u!64 &4589639674086771798
 MeshCollider:
   m_ObjectHideFlags: 0

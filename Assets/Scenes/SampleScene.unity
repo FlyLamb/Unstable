@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4475773, g: 0.46544772, b: 0.47666752, a: 1}
+  m_IndirectSpecularColor: {r: 0.16439442, g: 0.17889316, b: 0.18883741, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -155,7 +155,7 @@ MonoBehaviour:
   roofs:
   - {fileID: 2751141323813813854, guid: fc73343e9cc004c4c8c33e45fbf0db71, type: 3}
   - {fileID: 327020741117223267, guid: 9a202efacccde2d48875b200addd8af9, type: 3}
-  genRange: {x: 15, y: 23, z: -1.74, w: 1.74}
+  genRange: {x: 19, y: 23, z: -1.74, w: 1.74}
   genOnStart: 5
   plank: {fileID: 6147068361728319549, guid: defb560468cef0349981d6ef16797d22, type: 3}
 --- !u!4 &700583043
