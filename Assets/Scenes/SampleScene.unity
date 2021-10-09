@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roofs:
   - {fileID: 2751141323813813854, guid: fc73343e9cc004c4c8c33e45fbf0db71, type: 3}
+  - {fileID: 327020741117223267, guid: 9a202efacccde2d48875b200addd8af9, type: 3}
   genRange: {x: 15, y: 23, z: -1.74, w: 1.74}
   genOnStart: 5
   plank: {fileID: 6147068361728319549, guid: defb560468cef0349981d6ef16797d22, type: 3}
@@ -201,7 +202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcfe6d659b678a42bf353212e04d75e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roof: {fileID: 2751141323813813854, guid: fc73343e9cc004c4c8c33e45fbf0db71, type: 3}
+  roofs:
+  - {fileID: 2751141323813813854, guid: fc73343e9cc004c4c8c33e45fbf0db71, type: 3}
+  - {fileID: 327020741117223267, guid: 9a202efacccde2d48875b200addd8af9, type: 3}
+  - {fileID: 8105335809322433808, guid: 54e49543f831f484b9edc9231d04fca0, type: 3}
 --- !u!4 &1113879018
 Transform:
   m_ObjectHideFlags: 0

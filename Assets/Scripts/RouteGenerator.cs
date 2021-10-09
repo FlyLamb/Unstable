@@ -25,18 +25,18 @@ public class RouteGenerator : MonoBehaviour {
     public void Generate() {
         var roof = roofs[Random.Range(0, roofs.Length)];
         var rf = Instantiate(roof, position, roof.transform.rotation, transform);
+        rf.GetComponent<BuildingGenerator>().GenerateRooftop();
         position += new Vector3(0, Random.Range(genRange.z, genRange.w), Random.Range(genRange.x, genRange.y));
         instances.Add(rf);
         progress++;
         
         if(progress < 2) return;
         
-        var a = instances[progress-2].transform.Find("Corner B").position;
-        var b = rf.transform.Find("Corner A").position;
-        var c = rf.transform.Find("Corner B").position;
-        
+        var a = instances[progress-2].transform.Find("Corner A").position;
+        var b = rf.transform.Find("Corner B").position;
+
         var mid = Vector3.Lerp(a, b, 0.5f);
-        var go = Instantiate(plank, mid, Quaternion.LookRotation(b-a) * Quaternion.LookRotation(b-a), transform);
-        go.transform.localScale = new Vector3(0.2f, 0.1f, Vector3.Distance(a, b) - 12);
+        var go = Instantiate(plank, a, Quaternion.identity, transform);
+        go.GetComponent<Plank>().Connect(a, b);
     }
 }

@@ -11,6 +11,8 @@ public class BuildingGenerator : MonoBehaviour {
     public Gradient colors;
 [Space]
     public int height = 4;
+
+    public GameObject[] rooftopPresets;
     private void Start() {
         Generate(height);
     }
@@ -25,5 +27,9 @@ public class BuildingGenerator : MonoBehaviour {
             }
             
         }
+    }
+
+    public void GenerateRooftop() {
+        Instantiate(rooftopPresets[Random.Range(0, rooftopPresets.Length)], transform);
     }
 }
