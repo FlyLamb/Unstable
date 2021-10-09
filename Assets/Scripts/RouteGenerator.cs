@@ -15,7 +15,7 @@ public class RouteGenerator : MonoBehaviour {
     private List<GameObject> instances;
     
     private void Start() {
-        instances = new ();
+        instances = new List<GameObject>();
         for (int i = 0; i < genOnStart; i++) {
             Generate();
         }

@@ -17,14 +17,14 @@ public class Plank : MonoBehaviour {
         b = transform.InverseTransformPoint(b);
         
         Vector3[] vertices = {
-            new(a.x - width, a.y - height, a.z),
-            new(a.x + width, a.y - height, a.z),
-            new(a.x + width, a.y + height, a.z),
-            new(a.x - width, a.y + height, a.z),
-            new(b.x - width, b.y + height, b.z),
-            new(b.x + width, b.y + height, b.z),
-            new(b.x + width, b.y - height, b.z),
-            new(b.x - width, b.y - height, b.z),
+            new Vector3(a.x - width, a.y - height, a.z),
+            new Vector3(a.x + width, a.y - height, a.z),
+            new Vector3(a.x + width, a.y + height, a.z),
+            new Vector3(a.x - width, a.y + height, a.z),
+            new Vector3(b.x - width, b.y + height, b.z),
+            new Vector3(b.x + width, b.y + height, b.z),
+            new Vector3(b.x + width, b.y - height, b.z),
+            new Vector3(b.x - width, b.y - height, b.z),
         };
 
         mesh.vertices = vertices;
