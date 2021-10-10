@@ -6,9 +6,18 @@ env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
-
+  getBlender:
+    name: Download Blender
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: aptget blender
+        run: apt-get install blender
+      
+  
   buildWebGL:
-    #needs: testRunner
+    needs: getBlender
     name: Build for WebGL 🖥️
     runs-on: ubuntu-latest
     strategy:
@@ -50,7 +59,7 @@ jobs:
           path: build/WebGL
 
   buildWindows:
-    #needs: testRunner
+    needs: getBlender
     name: Build for Windows 🖥️
     runs-on: ubuntu-latest
     strategy:
@@ -92,7 +101,7 @@ jobs:
           path: build/StandaloneWindows64
           
   buildLinux:
-    #needs: testRunner
+    needs: getBlender
     name: Build for Linux 🖥️
     runs-on: ubuntu-latest
     strategy:
