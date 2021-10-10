@@ -7,18 +7,19 @@ using Random = UnityEngine.Random;
 public class BackgroundGenerator : MonoBehaviour {
     public GameObject[] roofs;
     private Vector3 current;
-    private Queue<GameObject> creations;
+    private Queue<GameObject> creations = new Queue<GameObject>();
+    
 
-    private void Start() {
-        creations = new Queue<GameObject>();
-        StartCoroutine(GenMass());
+    public void GenerateBackground(int l) {
+        StartCoroutine(GenerateBackgrounds(l));
     }
+    
 
-    private IEnumerator GenMass() {
-        for (int i = 0;; i++) {
+    private IEnumerator GenerateBackgrounds(int l) {
+        for (int i = 0;i<l; i++) {
             Generate();
-            yield return new WaitForSeconds(1.5f);
-            if (i > 120) {
+            yield return new WaitForSeconds(0.25f);
+            if (i > 80) {
                 Destroy(creations.Dequeue());
             }
         }

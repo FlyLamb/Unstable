@@ -45,8 +45,7 @@ public class GameManager : MonoBehaviour {
             scoreDisplay.text = $"{score}<br><size=20>HS: {highscore}</size>";
             scoreDisplay.transform.TweenLocalScaleY(1f, 0.05f);
         });
-        FindObjectOfType<RouteGenerator>().Generate();
-        
+
     }
 
     public void LoadGame() {

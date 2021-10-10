@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,12 +17,14 @@ public class RouteGenerator : MonoBehaviour {
     
     private void Start() {
         instances = new List<GameObject>();
+        FindObjectOfType<BackgroundGenerator>().GenerateBackground(6);
         for (int i = 0; i < genOnStart; i++) {
-            Generate();
+            Generate(false);
+            
         }
     }
 
-    public void Generate() {
+    public void Generate(bool destroyLast = true) {
         var roof = roofs[Random.Range(0, roofs.Length)];
         var rf = Instantiate(roof, position, roof.transform.rotation, transform);
         rf.GetComponent<BuildingGenerator>().GenerateRooftop();
@@ -35,7 +38,12 @@ public class RouteGenerator : MonoBehaviour {
         var b = rf.transform.Find("Corner B").position;
 
         var mid = Vector3.Lerp(a, b, 0.5f);
-        var go = Instantiate(plank, a, Quaternion.identity, transform);
+        var go = Instantiate(plank, a, Quaternion.identity, rf.transform);
         go.GetComponent<Plank>().Connect(a, b);
+
+        if (destroyLast && progress > 7) {
+            var w = instances[progress-7];
+            Destroy(w);
+        }
     }
 }

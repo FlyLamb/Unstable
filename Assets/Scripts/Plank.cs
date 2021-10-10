@@ -58,7 +58,7 @@ public class Plank : MonoBehaviour {
         if(amount <= 0) return;
         for (int i = 0; i < amount; i++) {
             var p = Vector3.Lerp(a, b, (float)i / amount);
-            Instantiate(coin,  p+ Vector3.up * 0.5f + Coinoise(p), Quaternion.identity, transform);
+            Instantiate(coin,  p+ Vector3.up * 0.4f + Coinoise(p), Quaternion.identity, transform);
         }
     }
 
