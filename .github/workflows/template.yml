@@ -17,9 +17,9 @@ jobs:
       
   
   buildWebGL:
-    needs: getBlender
+    #needs: getBlender
     name: Build for WebGL 🖥️
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       fail-fast: false
     steps:
@@ -59,9 +59,9 @@ jobs:
           path: build/WebGL
 
   buildWindows:
-    needs: getBlender
+    #needs: getBlender
     name: Build for Windows 🖥️
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       fail-fast: false
     steps:
@@ -101,9 +101,9 @@ jobs:
           path: build/StandaloneWindows64
           
   buildLinux:
-    needs: getBlender
+    #needs: getBlender
     name: Build for Linux 🖥️
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       fail-fast: false
     steps:
